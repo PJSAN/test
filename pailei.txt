@@ -1,0 +1,29 @@
+
+save=[]
+def print_permutation(n, A, cur):
+    if cur == n:
+        tmp=[]
+        for i in xrange(0, n):
+            tmp.append(A[i]),
+        save.append(tmp)
+    else:
+        for i in xrange(1, n + 1):
+            ok = True
+            for j in xrange(0, cur):
+                if A[j] == i:
+                    ok = False
+                    break
+
+            if ok:
+                A[cur] = i
+                print_permutation(n, A, cur + 1)
+
+
+A = []
+for i in range(100):
+    A.append(i)
+cur = 0
+n = 5
+print_permutation(n, A, cur)
+
+print save
