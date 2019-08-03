@@ -1,6 +1,6 @@
-
-save=[]
+save = []
 def print_permutation(n, A, cur):
+
     if cur == n:
         tmp=[]
         for i in xrange(0, n):
@@ -19,11 +19,16 @@ def print_permutation(n, A, cur):
                 print_permutation(n, A, cur + 1)
 
 
-A = []
-for i in range(100):
-    A.append(i)
-cur = 0
-n = 5
-print_permutation(n, A, cur)
 
-print save
+def ans(n,k):
+    A = []
+    for i in range(n+1):
+        A.append(i)
+    cur = 0
+    print_permutation(n, A, cur)
+    print save
+    return save[-k]
+
+if __name__ == '__main__':
+
+    print ans(3,1)
