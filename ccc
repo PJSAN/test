@@ -1,0 +1,73 @@
+#!usr/bin/env python
+# -*- coding:utf-8 -*-
+'''''
+__AUthor__:沂水寒城
+功能：对指定字符串寻找所有回文子序列
+'''
+def is_huiwen(one_str_list):
+  '''''
+  输入一个字符串列表，判断是否为回文序列
+  '''
+  if len(one_str_list)==1:
+    return True
+  else:
+    half=len(one_str_list)/2
+    if len(one_str_list)%2==0:
+      first_list=one_str_list[:half]
+      second_list=one_str_list[half:]
+    else:
+      first_list=one_str_list[:half]
+      second_list=one_str_list[half+1:]
+    if first_list==second_list[::-1]:
+      return True
+    else:
+      return False
+def get_list_all_sub_list(num_list):
+  '''
+  输入一个列表，返回该列表所有的子列表，这里定义的空列表不属于子列表，故：子列表最小长度为1
+  '''
+  if len(num_list)==1:
+    return [num_list]
+  sub_list=get_list_all_sub_list(num_list[:-1])
+  extra=num_list[-1:]
+  temp_list=[]
+  for one in sub_list:
+    temp_list.append(one+extra)
+  return sub_list+temp_list
+def slice_func(one_str):
+  '''''
+  '''
+  result_list=[]
+  for i in range(1,len(one_str)):
+    result_list.append(one_str[:i])
+    result_list.append(one_str[i:])
+  result_list+=list(one_str)
+  result_list.append(one_str)
+  return list(set(result_list))
+def main_func2():
+  '''''
+  主调用函数
+  '''
+  str_list=['abdc','abba']
+  for one_str in str_list:
+    result_list=slice_func(one_str)
+    print '-----------------------------------------------'
+    for one in result_list:
+      if is_huiwen(list(one)):
+        print one+'是回文序列'
+def main_func1():
+  '''''
+  主调用函数
+  '''
+  str_list=['abdc','abba']
+  for one_str in str_list:
+    one_str_list=list(one_str)
+    one_all_sub_list=get_list_all_sub_list(one_str_list)
+    print '------------------------------------------------'
+    print one_all_sub_list
+    for one in one_all_sub_list:
+      if is_huiwen(one):
+        print ''.join(one)+'是回文序列'
+if __name__ == '__main__':
+  print "脚本之家测试结果："
+  main_func2()
